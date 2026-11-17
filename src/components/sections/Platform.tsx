@@ -1,0 +1,4 @@
+import * as Icons from "lucide-react";
+import { home } from "@/content/home";
+import Reveal from "@/components/ui/Reveal";
+export default function Platform() { return <section className="section platform-section" id="platform"><div className="container"><div className="section-kicker">04 / THE PLATFORM</div><div className="section-heading"><span className="eyebrow dark-eyebrow">A connected toolkit</span><h2>{home.platform.headline.pre}<em>{home.platform.headline.accent}</em></h2></div><div className="platform-grid">{home.platform.items.map((item,i)=>{const Icon=Icons[item.icon as keyof typeof Icons] as React.ElementType;return <Reveal className="platform-card" key={item.title}><div className="platform-icon"><Icon size={22}/></div><span className="platform-number">0{i+1}</span><h3>{item.title}</h3><p>{item.text}</p></Reveal>})}</div><div className="platform-smallprint">{home.platform.smallPrint.map((text)=><p key={text}>* {text}</p>)}</div></div></section>; }

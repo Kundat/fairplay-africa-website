@@ -1,0 +1,44 @@
+.root {
+  --pl-bg: #fff;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: var(--pl-bg);
+  transition: opacity 0.45s ease, visibility 0.45s;
+}
+.done { opacity: 0; visibility: hidden; }
+.root svg {
+  width: clamp(72px, 14vw, 112px);
+  height: auto;
+  overflow: visible;
+  animation: breathe 2.4s ease-in-out 1.8s infinite;
+}
+.t, .o, .c { transform-box: fill-box; transform-origin: center; }
+.t {
+  fill: #195664;
+  fill-opacity: 0;
+  stroke: #195664;
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 1.1s cubic-bezier(0.65, 0, 0.35, 1) 0.1s forwards,
+    fill 0.4s ease 0.9s forwards;
+}
+.o { opacity: 0; animation: reveal 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 1s forwards; }
+.c { opacity: 0; animation: pop 0.45s cubic-bezier(0.3, 1.6, 0.5, 1) 1.35s forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fill { to { fill-opacity: 1; } }
+@keyframes reveal { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: none; } }
+@keyframes pop { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: none; } }
+@keyframes breathe { 50% { transform: scale(1.05); } }
+.quick *, .quick svg { animation: none !important; }
+.quick .t { fill-opacity: 1; stroke-dashoffset: 0; }
+.quick .o, .quick .c { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .root *, .root svg { animation: none !important; }
+  .root .t { fill-opacity: 1; stroke-dashoffset: 0; }
+  .root .o, .root .c { opacity: 1; }
+}
